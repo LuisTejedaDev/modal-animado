@@ -67,7 +67,7 @@ export default ({visibility = true, dismissable = true, handleDismiss = () => {}
         })
     }
     
-    const translateStyle = {
+    const modalStyle = {
         transform: [
             {
                 translateY: translateY.interpolate({
@@ -75,6 +75,13 @@ export default ({visibility = true, dismissable = true, handleDismiss = () => {}
                     outputRange: [(height * 2), keyboard ? -100 : 0],
                     extrapolate: 'clamp'
                 }) 
+            },
+            {
+                scale: translateY.interpolate({
+                    inputRange: [0, 0.8, 1],
+                    outputRange: [1, 1.5, 1],
+                    extrapolate: 'clamp'
+                })
             }
         ]
     }
@@ -102,7 +109,7 @@ export default ({visibility = true, dismissable = true, handleDismiss = () => {}
             />
             <Animated.View 
                 pointerEvents={visibility ? 'auto' : 'none'}/* Tenemos que agregar esto para el estilo del fade */
-                style={[styles.modal, {maxHeight: size === 's' ? 'auto' : (height - 200), width: maxWidth}, translateStyle]}>
+                style={[styles.modal, {maxHeight: size === 's' ? 'auto' : (height - 200), width: maxWidth}, modalStyle]}>
                 {
                     children
                 }
